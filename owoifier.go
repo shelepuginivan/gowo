@@ -108,8 +108,20 @@ func NewWithVarsProbabilities(
 //   - Adds s-stutters
 //   - Adds actions *blushes*
 //   - Adds emoticons ≧◉◡◉≦
+//
+// The text is split into tokens by the whitespace (`" "`) character.
 func (o Owoifier) Owoify(text string) string {
 	tokens := strings.Split(text, " ")
+	result := o.OwoifyTokens(tokens)
+	return strings.Join(result, " ")
+}
+
+// Owoify performs tokens owofication:
+//   - Replaces symbols and substrings with replacements
+//   - Adds s-stutters
+//   - Adds actions *blushes*
+//   - Adds emoticons ≧◉◡◉≦
+func (o Owoifier) OwoifyTokens(tokens []string) []string {
 	result := make([]string, 0, len(tokens))
 
 	for _, token := range tokens {
@@ -134,7 +146,7 @@ func (o Owoifier) Owoify(text string) string {
 		}
 	}
 
-	return strings.Join(result, " ")
+	return result
 }
 
 // RandomAction returns a random action of the Owoifier.
